@@ -8,17 +8,32 @@
 */
 
 // EXAMPLE SOLUTION CODE:
+//constructor Airplane que recibe 1 argumento (name). el argumento name es asignado a la propiedad (name) y la propiedad isFlying es inicializado en false
 function Airplane(name) {
   this.name = name;
   this.isFlying = false;
 }
-Airplane.prototype.takeOff = function () {
+// crear metodo takeOff en Airplane
+Airplane.prototype.takeOff = function () { 
   this.isFlying = true;
 };
+//crear metodo land en Airplane
 Airplane.prototype.land = function () {
   this.isFlying = false;
 };
-
+//instanciar 2 objetos Airplane
+const airplane1 = new Airplane("Halcon milenario");
+const airplane2 = new Airplane("Baron Rojo");
+console.log("nombre del airplane1:", airplane1.name);
+console.log("esta en el aire?1", airplane1.isFlying);
+console.log("nombre del airplane2:", airplane2.name);
+console.log("esta en el aire?2", airplane2.isFlying);
+//llamar metodo takeOff en instancia 1. esto no tiene efecto en la instancia #2
+airplane1.takeOff();
+console.log("esta en el aire?1", airplane1.isFlying);
+console.log("esta en el aire?2", airplane2.isFlying);
+airplane1.land();
+console.log("esta en el aire?1", airplane1.isFlying);
 
 /*
 // 👇 COMPLETE YOUR WORK BELOW 👇
@@ -39,15 +54,29 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-  
+//constructor person con nombre, edad y array vacio "estomago"
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
-
-
-
-
-
-
+//agregar la funcion .eat al constructor person junto con la condicional
+Person.prototype.eat = function (someFood) {
+  if (this.stomach.length < 10) {
+    this.stomach.push(someFood);
+  }
+};
+//agregar poop = vaciar array
+Person.prototype.poop = function () {
+  this.stomach = [];
+};
+// metodo .toString que retorna nombre, edad
+Person.prototype.toString = function () {
+  return `${this.name}, ${this.age}`;
+};
+const person = new Person("Bob Newman", "45");
+person.eat("Chocolate");
+console.log(person);
 
 /*
   TASK 2
@@ -63,10 +92,7 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-  
-}
-
+function Car() {}
 
 /*
   TASK 3
@@ -75,10 +101,7 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
-}
-
+function Baby() {}
 
 /* 
   TASK 4
@@ -89,18 +112,17 @@ function Baby() {
   4. 
 */
 
-
 ///////// END OF CHALLENGE /////////
 
 /* 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 */
-function foo(){
-  console.log('its working!');
-  return 'bar';
+function foo() {
+  console.log("its working!");
+  return "bar";
 }
 foo();
 module.exports = {
   foo,
-  Person, 
+  Person,
   Car,
-  Baby
-}
+  Baby,
+};
